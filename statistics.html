@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="hero">
+    <h1>Statistics 📊</h1>
+    <p>See how much of your study plan you've completed.</p>
+</div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <h3>{{ total }}</h3>
+            <p>Total Tasks</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <h3>{{ completed }}</h3>
+            <p>Completed</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <h3>{{ pending }}</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <h3>{{ high }}</h3>
+            <p>High Priority</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="hero">
+    <h3>Overall Progress</h3>
+
+    <div class="progress mt-3" style="height: 25px;">
+        <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: {{ progress }}%;"
+        >
+            {{ progress }}%
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-3">Subjects</h2>
+
+{% if subjects %}
+<div class="row g-3">
+
+    {% for subject in subjects %}
+    <div class="col-md-4">
+        <div class="subject-card">
+            <h4>{{ subject.name }}</h4>
+
+            <p>
+                {{ subject.completed or 0 }}
+                completed /
+                {{ subject.total }}
+                total
+            </p>
+
+            {% if subject.total %}
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        style="width: {{ ((subject.completed or 0) / subject.total * 100)|round }}%;"
+                    ></div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% else %}
+<div class="empty-box">
+    <h3>No subjects yet.</h3>
+    <p>Add subjects to see statistics.</p>
+</div>
+{% endif %}
+
+{% endblock %}

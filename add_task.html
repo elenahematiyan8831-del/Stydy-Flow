@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="form-box">
+    <h1>Add New Task 📝</h1>
+
+    <form method="POST">
+
+        <label class="form-label">Task title</label>
+        <input
+            type="text"
+            name="title"
+            class="form-control mb-3"
+            placeholder="Example: Study C# loops"
+            required
+        >
+
+        <label class="form-label">Description</label>
+        <textarea
+            name="description"
+            class="form-control mb-3"
+            rows="4"
+            placeholder="What do you need to do?"
+        ></textarea>
+
+        <label class="form-label">Subject</label>
+        <select name="subject_id" class="form-select mb-3">
+            <option value="">No subject</option>
+
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}">
+                    {{ subject.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Due date</label>
+        <input
+            type="datetime-local"
+            name="due_date"
+            class="form-control mb-3"
+        >
+
+        <label class="form-label">Priority</label>
+        <select name="priority" class="form-select mb-4">
+            <option value="High">🔴 High</option>
+            <option value="Medium" selected>🟡 Medium</option>
+            <option value="Low">🟢 Low</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary w-100">
+            Add Task
+        </button>
+
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="form-box">
+
+    <h1>Create Account ✨</h1>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="username"
+            class="form-control mb-3"
+            placeholder="Username"
+            autocomplete="username"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            class="form-control mb-3"
+            placeholder="Password"
+            autocomplete="new-password"
+            required
+        >
+
+        <input
+            type="password"
+            name="confirmation"
+            class="form-control mb-3"
+            placeholder="Confirm password"
+            autocomplete="new-password"
+            required
+        >
+
+        <button type="submit" class="btn btn-primary w-100">
+            Register
+        </button>
+
+    </form>
+
+    <p class="mt-3 text-center">
+        Already have an account?
+        <a href="/login">Login</a>
+    </p>
+
+</div>
+
+{% endblock %}

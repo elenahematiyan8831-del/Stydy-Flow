@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}StudyFlow{% endblock %}
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles.css') }}"
+    >
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/">
+            📚 StudyFlow
+        </a>
+
+        {% if session.get("user_id") %}
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <a class="btn btn-outline-primary" href="/">
+                Dashboard
+            </a>
+
+            <a class="btn btn-outline-primary" href="/tasks">
+                Tasks
+            </a>
+
+            <a class="btn btn-outline-primary" href="/subjects">
+                Subjects
+            </a>
+
+            <a class="btn btn-outline-primary" href="/planner">
+                🧠 Planner
+            </a>
+
+            <a class="btn btn-outline-primary" href="/statistics">
+                📊 Statistics
+            </a>
+
+            <a class="btn btn-danger" href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div>
+
+            <a class="btn btn-outline-primary me-2" href="/login">
+                Login
+            </a>
+
+            <a class="btn btn-primary" href="/register">
+                Register
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<main class="container py-4">
+
+    {% block main %}{% endblock %}
+
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

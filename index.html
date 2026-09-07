@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="hero">
+    <h1>Welcome to StudyFlow 📚</h1>
+    <p>Organize your study, track your tasks, and reach your goals.</p>
+</div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <h3>{{ total }}</h3>
+            <p>Total Tasks</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <h3>{{ completed }}</h3>
+            <p>Completed</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <h3>{{ progress }}%</h3>
+            <p>Progress</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="progress mb-4" style="height: 25px;">
+    <div
+        class="progress-bar"
+        role="progressbar"
+        style="width: {{ progress }}%;"
+    >
+        {{ progress }}%
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>My Tasks</h2>
+
+    <a href="/add_task" class="btn btn-primary">
+        + Add Task
+    </a>
+</div>
+
+{% if tasks %}
+
+<div class="list-group">
+
+    {% for task in tasks %}
+
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+
+        <div>
+            <h5 class="{% if task.completed %}text-decoration-line-through{% endif %}">
+                {{ task.title }}
+            </h5>
+
+            {% if task.subject_name %}
+                <small class="text-muted">
+                    {{ task.subject_name }}
+                </small>
+            {% endif %}
+
+            {% if task.due_date %}
+                <br>
+                <small class="text-muted">
+                    Due: {{ task.due_date }}
+                </small>
+            {% endif %}
+        </div>
+
+        {% if not task.completed %}
+        <form method="POST" action="/complete/{{ task.id }}">
+            <button class="btn btn-success">
+                ✓ Complete
+            </button>
+        </form>
+        {% else %}
+            <span class="badge bg-success">
+                Completed
+            </span>
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="empty-box">
+    <h3>No tasks yet 🎯</h3>
+    <p>Start by adding your first study task.</p>
+
+    <a href="/add_task" class="btn btn-primary">
+        Add Your First Task
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}

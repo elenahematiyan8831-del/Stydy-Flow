@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<h1 class="mb-4">My Subjects 📚</h1>
+
+<form method="POST" action="/add_subject" class="mb-4">
+    <div class="input-group">
+        <input
+            type="text"
+            name="name"
+            class="form-control"
+            placeholder="Enter subject name"
+            required
+        >
+
+        <button class="btn btn-primary">
+            + Add Subject
+        </button>
+    </div>
+</form>
+
+<div class="row g-3">
+
+    {% for subject in subjects %}
+
+    <div class="col-md-4">
+        <div class="subject-card">
+            <h4>{{ subject.name }}</h4>
+            <p>Ready to study 🚀</p>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="empty-box">
+        <h3>No subjects yet.</h3>
+        <p>Add your first subject above.</p>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>My Tasks ✅</h1>
+
+    <a href="/add_task" class="btn btn-primary">
+        + Add Task
+    </a>
+</div>
+
+<form method="GET" class="row g-2 mb-4">
+
+    <div class="col-md-3">
+        <select name="priority" class="form-select">
+            <option value="">All priorities</option>
+
+            <option value="High"
+                {% if selected_priority == "High" %}selected{% endif %}>
+                🔴 High
+            </option>
+
+            <option value="Medium"
+                {% if selected_priority == "Medium" %}selected{% endif %}>
+                🟡 Medium
+            </option>
+
+            <option value="Low"
+                {% if selected_priority == "Low" %}selected{% endif %}>
+                🟢 Low
+            </option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">All tasks</option>
+
+            <option value="pending"
+                {% if selected_status == "pending" %}selected{% endif %}>
+                Pending
+            </option>
+
+            <option value="completed"
+                {% if selected_status == "completed" %}selected{% endif %}>
+                Completed
+            </option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="sort" class="form-select">
+            <option value="due" {% if selected_sort == "due" %}selected{% endif %}>
+                Due date
+            </option>
+
+            <option value="priority" {% if selected_sort == "priority" %}selected{% endif %}>
+                Priority
+            </option>
+
+            <option value="title" {% if selected_sort == "title" %}selected{% endif %}>
+                Title
+            </option>
+
+            <option value="newest" {% if selected_sort == "newest" %}selected{% endif %}>
+                Newest
+            </option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100">
+            Apply Filters
+        </button>
+    </div>
+
+</form>
+
+{% if tasks %}
+
+<div class="list-group">
+
+    {% for task in tasks %}
+
+    <div class="list-group-item">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+            <div class="me-3">
+
+                <h5 class="{% if task.completed %}text-decoration-line-through{% endif %}">
+                    {{ task.title }}
+                </h5>
+
+                {% if task.description %}
+                    <p class="text-muted mb-2">
+                        {{ task.description }}
+                    </p>
+                {% endif %}
+
+                {% if task.subject_name %}
+                    <span class="badge bg-info">
+                        {{ task.subject_name }}
+                    </span>
+                {% endif %}
+
+                <span class="badge
+                    {% if task.priority == 'High' %}
+                        bg-danger
+                    {% elif task.priority == 'Medium' %}
+                        bg-warning text-dark
+                    {% else %}
+                        bg-success
+                    {% endif %}
+                ">
+                    {{ task.priority }}
+                </span>
+
+                {% if task.due_date %}
+                    <small class="text-muted ms-2">
+                        📅 {{ task.due_date }}
+                    </small>
+                {% endif %}
+
+            </div>
+
+            <div class="text-nowrap">
+
+                <form
+                    method="POST"
+                    action="/complete/{{ task.id }}"
+                    class="d-inline"
+                >
+                    {% if task.completed %}
+                        <button class="btn btn-secondary btn-sm">
+                            Undo
+                        </button>
+                    {% else %}
+                        <button class="btn btn-success btn-sm">
+                            ✓ Complete
+                        </button>{% endif %}
+                </form>
+
+                <a
+                    href="/edit_task/{{ task.id }}"
+                    class="btn btn-primary btn-sm"
+                >
+                    Edit
+                </a>
+
+                <form
+                    method="POST"
+                    action="/delete_task/{{ task.id }}"
+                    class="d-inline"
+                >
+                    <button class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="empty-box">
+    <h3>No tasks found 🎯</h3>
+    <p>Try changing your filters or create a new task.</p>
+
+    <a href="/add_task" class="btn btn-primary">
+        Add Task
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}

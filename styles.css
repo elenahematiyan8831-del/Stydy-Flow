@@ -1,0 +1,169 @@
+body {
+    background: #f4f8ff;
+    color: #24344d;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.96) !important;
+}
+
+.navbar-brand {
+    color: #4d8dcc !important;
+    font-size: 1.35rem;
+}
+
+.hero {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(77, 141, 204, 0.10);
+}
+
+.hero h1 {
+    color: #4d8dcc;
+    font-weight: 700;
+}
+
+.hero p {
+    color: #68778d;
+    font-size: 1.05rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(77, 141, 204, 0.08);
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-card h3 {
+    font-size: 34px;
+    color: #4d8dcc;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #718096;
+}
+
+.form-box {
+    max-width: 550px;
+    margin: 40px auto;
+    background: white;
+    padding: 38px;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(77, 141, 204, 0.10);
+}
+
+.form-box h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4d8dcc;
+    font-weight: 700;
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 11px 14px;
+    border: 1px solid #d9e6f5;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #75a9d8;
+    box-shadow: 0 0 0 0.2rem rgba(77, 141, 204, 0.15);
+}
+
+.btn {
+    border-radius: 11px;
+}
+
+.subject-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(77, 141, 204, 0.08);
+    height: 100%;
+}
+
+.subject-card h4 {
+    color: #4d8dcc;
+}
+
+.list-group-item {
+    border: none;
+    margin-bottom: 12px;
+    border-radius: 18px !important;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(77, 141, 204, 0.06);
+}
+
+.list-group-item h5 {
+    color: #2d4059;
+    font-weight: 600;
+}
+
+.empty-box {
+    background: white;
+    text-align: center;
+    padding: 55px 30px;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(77, 141, 204, 0.08);
+}
+
+.empty-box h1,
+.empty-box h3 {
+    color: #4d8dcc;
+}
+
+.progress {
+    border-radius: 20px;
+    background: #e7f0fa;
+}
+
+.progress-bar {
+    background: #4d8dcc;
+    border-radius: 20px;
+}
+
+.badge {
+    border-radius: 8px;
+    padding: 7px 10px;
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .navbar .d-flex {
+        justify-content: flex-end;
+    }
+
+    .hero {
+        padding: 28px 22px;
+    }
+
+    .form-box {
+        margin: 20px auto;
+        padding: 25px;
+    }
+
+    .list-group-item > div {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
